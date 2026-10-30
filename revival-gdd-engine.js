@@ -121,11 +121,8 @@ if(typeof document!=='undefined'){
  const shopHotspot=document.createElement('button');shopHotspot.className='gddShopLink';shopHotspot.setAttribute('aria-label','Buy missing rebirth pets');shopHotspot.onclick=()=>openLiveShop('rebirth');$('#scene').append(shopHotspot);window.closeShop=()=>{$('#shop').style.display='none';viewTasks(returnToTasks);$('#rows').scrollTop=returnScroll};window.finishShop=async()=>{if(busy)return;$('#shop').style.display='none';viewTasks(true);$('#rows').scrollTop=returnScroll;await simulate('purchase',5)};
  window.addEventListener('keydown',e=>{if(e.key==='Escape'&&$('#shop').style.display==='block'){e.preventDefault();window.closeShop();}});
  const timer=document.createElement('div');timer.className='gddTimer';$('#scene').append(timer);function updateTimer(){const ms=Math.max(0,s.expiresAt-effectiveNow());timer.textContent=ms?'Ends in '+Math.floor(ms/86400000)+'d '+Math.floor(ms%86400000/3600000)+'h':'Event ended';}updateTimer();setInterval(updateTimer,30000);
- window.addEventListener('storage',e=>{if(e.key===key&&e.newValue){s=JSON.parse(e.newValue);draw();updateTimer()}});
- const viewButton=$('#viewtoggle');
- function refreshViewButton(){if(!viewButton)return;viewButton.style.display='block';viewButton.style.background='#2f86d7';viewButton.style.border='2px solid #b1d7ff';viewButton.style.borderRadius='9px';viewButton.style.color='#fff';viewButton.style.fontSize='24px';viewButton.style.padding='10px 18px';viewButton.style.width='254px';viewButton.style.height='69px';viewButton.querySelector('span').textContent=showTasks?'← 7-Day Login':'DAILY TASKS';}
- viewButton?.addEventListener('click',()=>setTimeout(refreshViewButton,0));
- refreshViewButton();viewTasks(false);refreshViewButton();resize();
+ const renderFix=document.createElement('style');renderFix.textContent='html,body{background:#cfe5fb!important}#viewport{background:#cfe5fb!important;overflow:visible!important}#scene{background-color:#cfe5fb!important}';document.head.append(renderFix);
+ window.addEventListener('storage',e=>{if(e.key===key&&e.newValue){s=JSON.parse(e.newValue);draw();updateTimer()}});viewTasks(false);resize();
 }
 
 
