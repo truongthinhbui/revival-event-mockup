@@ -60,7 +60,7 @@ if(typeof document!=='undefined'){
  const save=()=>{try{localStorage.setItem(key,JSON.stringify(s))}catch{}};
  document.querySelectorAll('.msnode,.msrow,.milestoneclaim,.claimed,.unlock').forEach(x=>x.remove());
  const layer=document.createElement('div');layer.id='gddMilestoneLayer';$('#scene').append(layer);
- function resize(){const viewport=$('#viewport');const width=viewport.clientWidth||1844;const scale=Math.min(1,width/1844);$('#scene').style.transform=`scale(${scale})`;viewport.style.height=Math.ceil(853*scale)+'px';viewport.style.minHeight='1px'}new ResizeObserver(resize).observe($('#viewport'));window.addEventListener('resize',resize);
+ function resize(){const scale=$('#viewport').clientWidth/1844;$('#scene').style.transform=`scale(${scale})`;$('#viewport').style.height=853*scale+'px'}new ResizeObserver(resize).observe($('#viewport'));
  function pointY(p){const a=[[0,728],[15,682],[40,594],[60,506],[75,418],[90,330]];for(let i=1;i<a.length;i++)if(p<=a[i][0])return a[i-1][1]+(a[i][1]-a[i-1][1])*(p-a[i-1][0])/(a[i][0]-a[i-1][0]);return 330;}
  function button(text,fn,disabled=false){const b=document.createElement('button');b.textContent=text;b.onclick=fn;b.disabled=disabled;return b;}
  function receipt(r){const box=$('#reward .rewardbox');box.replaceChildren();const title=document.createElement('h2');title.textContent=r.ok?'SENT TO MAIL':'UNAVAILABLE';const p=document.createElement('p');p.textContent=r.ok?'Rewards have been sent to your mailbox.':r.reason;box.append(title,p);box.append(button('CONTINUE',()=>$('#reward').style.display='none'));$('#reward').style.display='grid';}
